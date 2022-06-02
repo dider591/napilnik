@@ -1,24 +1,41 @@
-
     class Weapon
     {
-        public int Damage;
-        public int Bullets;
+        private int _damage;
+        private int _bullets;
 
         public void Fire(Player player)
         {
-            player.Health -= Damage;
-            Bullets -= 1;
+            player.ApplyDamage(_damage);
+
+            if (_bullets <= 0)
+            {
+                Debug.log("Пастроны закончились");
+            }
+
+            _bullets--;
         }
     }
 
     class Player
     {
-        public int Health;
+        private int _health;
+
+        public int Health => _health;
+
+        public void ApplyDamage(int damage)
+        {
+            if (Health <= 0)
+            {
+                Debug.log("Game Ower")
+            }
+
+            _health -= damage
+        }
     }
 
     class Bot
     {
-        public Weapon Weapon;
+        private Weapon Weapon;
 
         public void OnSeePlayer(Player player)
         {
